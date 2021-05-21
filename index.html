@@ -302,9 +302,13 @@ function startWalking(final_y){
                         //}
 
                         $(obj_enemy).css('width', 160*diff).css('height', 160*diff).css('margin-left', -20*diff).css('margin-top', -52*diff).css('background-image', "url('static/dead2.gif?v=" + timestamp + "')");
-                        setTimeout(function(){
-                            $('#blood' + id_blood ).addClass('center').css('display','flex').css('background-image', "url('static/splat4.gif?v=" + timestamp + "')");
+
                         
+                        $('#blood' + id_blood ).addClass('center').css('display','flex').css('background-image', "url('static/splat4.gif?v=" + timestamp + "')");
+
+                        
+                        setTimeout(function(){
+
                             $('#blood' + id_blood ).find('div').animate({
                                 opacity:1
                             }, 500);
@@ -319,7 +323,7 @@ function startWalking(final_y){
 
 
                             }, 500);
-                        }, 500);
+                        }, 250);
 
                         
                         $('#player').css('background-image', "url('static/stop2.gif')");
