@@ -119,16 +119,16 @@
     <div id="player" style="top:50px;z-index:4;background:url('static/stop2.gif');background-size:cover;width:100px;height:100px;position:absolute;"></div>
 
 
-    <div id="enemy1" data-blood="1" class="enemy" style="z-index:3;background:url('static/enemy_walk.gif');background-size:cover;width:100px;height:100px;position:absolute;"></div>
+    <div id="enemy1" data-blood="1" data-dead="0" class="enemy" style="z-index:3;background:url('static/enemy_walk.gif');background-size:cover;width:100px;height:100px;position:absolute;"></div>
     <div id="blood1" class="center blood" style="display:none;background-size:cover;z-index:1;position:relative;height:600px;text-align:center;"><div style="opacity:0;padding-left:90px;">¡hola! soy miquel<br>programador web</div></div>
 
-    <div id="enemy2" data-blood="2" class="enemy" style="z-index:3;background:url('static/enemy_walk.gif');background-size:cover;width:100px;height:100px;position:absolute;"></div>
+    <div id="enemy2" data-blood="2" data-dead="0" class="enemy" style="z-index:3;background:url('static/enemy_walk.gif');background-size:cover;width:100px;height:100px;position:absolute;"></div>
     <div id="blood2" class="center blood" style="display:none;background-size:cover;z-index:1;position:absolute;height:600px;text-align:center;"><div style="opacity:0;padding-left:90px;">me gusta crear<br>experiencias<br>interactivas</div></div>
 
-    <div id="enemy3" data-blood="3" class="enemy" style="z-index:3;background:url('static/enemy_walk.gif');background-size:cover;width:100px;height:100px;position:absolute;"></div>
+    <div id="enemy3" data-blood="3" data-dead="0" class="enemy" style="z-index:3;background:url('static/enemy_walk.gif');background-size:cover;width:100px;height:100px;position:absolute;"></div>
     <div id="blood3" class="center blood" style="display:none;background-size:cover;z-index:1;position:absolute;height:600px;text-align:center;"><div style="opacity:0;padding-left:90px;">esto es una<br>demostración<br>de lo que puedo<br>hacer</div></div>
 
-    <div id="enemy4" data-blood="4" class="enemy" style="z-index:3;background:url('static/enemy_walk.gif');background-size:cover;width:100px;height:100px;position:absolute;"></div>
+    <div id="enemy4" data-blood="4" data-dead="0" class="enemy" style="z-index:3;background:url('static/enemy_walk.gif');background-size:cover;width:100px;height:100px;position:absolute;"></div>
     <div id="blood4" class="center blood" style="display:none;background-size:cover;z-index:1;position:absolute;height:600px;text-align:center;"><div style="opacity:0;padding-left:90px;"><button onclick="document.location.reload()">¿Repetir?</button><button onclick="share()">Compartir</button><button onclick="window.open('https://vivirenremoto.github.io/')">Portafolio</button></div></div>
 
 
@@ -207,8 +207,6 @@ function share() {
     var share_title = document.title;
     var share_url = document.location.href;
 
-
-
     if (navigator.share) {
         navigator.share({
             title: share_title,
@@ -235,8 +233,7 @@ function startWalking(final_y){
     
     $('#player').css('background-image', "url('static/walk.gif')");
 
-    //final_x = e.offsetX - parseInt(player_width / 2);
-    //final_y = e.offsetY - parseInt(player_height / 2);
+
 
 
     player_walking = setInterval(function () {
@@ -265,46 +262,52 @@ function startWalking(final_y){
                 is_attack = false;
             
                 var id_blood = $(obj_enemy).data('blood');
+                var enemy_dead = $(obj_enemy).data('dead');
+                if( enemy_dead == 0 ){
+                    $(obj_enemy).data('dead', 1)
 
-                $('#sound_shoot')[0].currentTime = 0;
-                $('#sound_shoot')[0].play();
-
-                $('#player').css('background-image', "url('static/attack.gif')");
-
-
-                setTimeout(function(){
+                
 
 
-                    var diff = 1.1;
-                    //if( is_mobile ){
-                    //    diff = 1.1;
-                    //}
+                    $('#sound_shoot')[0].currentTime = 0;
+                    $('#sound_shoot')[0].play();
 
-                    $(obj_enemy).css('width', 160*diff).css('height', 160*diff).css('margin-left', -25*diff).css('margin-top', -60*diff).css('background-image', "url('static/dead.gif?v=" + new Date().getTime() + "')");
+                    $('#player').css('background-image', "url('static/attack.gif')");
+
+
                     setTimeout(function(){
-                        $('#blood' + id_blood ).show().css('background-image', "url('static/splat3.gif?v=" + new Date().getTime() + "')");
-                    
-                        $('#blood' + id_blood ).find('div').animate({
-                            opacity:1
+
+
+                        var diff = 1.1;
+                        //if( is_mobile ){
+                        //    diff = 1.1;
+                        //}
+
+                        $(obj_enemy).css('width', 160*diff).css('height', 160*diff).css('margin-left', -25*diff).css('margin-top', -60*diff).css('background-image', "url('static/dead.gif?v=" + new Date().getTime() + "')");
+                        setTimeout(function(){
+                            $('#blood' + id_blood ).show().css('background-image', "url('static/splat3.gif?v=" + new Date().getTime() + "')");
+                        
+                            $('#blood' + id_blood ).find('div').animate({
+                                opacity:1
+                            }, 500);
+
+                            
+                            $('#face').css('background-image',"url('static/face_normal2.gif')");
+
+                            setTimeout(function(){
+                                $(obj_enemy).fadeOut('fast');
+
+                                
+
+
+                            }, 500);
                         }, 500);
 
                         
-                        $('#face').css('background-image',"url('static/face_normal2.gif')");
-
-                        setTimeout(function(){
-                            $(obj_enemy).fadeOut('fast');
-
-                            
-
-
-                        }, 500);
+                        $('#player').css('background-image', "url('static/stop2.gif')");
                     }, 500);
 
-                    
-                    $('#player').css('background-image', "url('static/stop2.gif')");
-                }, 500);
-
-
+                }
             
             }else{
                 $('#player').css('background-image', "url('static/stop2.gif')");
@@ -340,19 +343,6 @@ function startWalking(final_y){
 
 }
 
-function randomNumber(min, max) {
-    if (min > max) {
-        let temp = max;
-        max = min;
-        min = temp;
-    }
-
-    if (min <= 0) {
-        return Math.floor(Math.random() * (max + Math.abs(min) + 1)) + min;
-    } else {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-}
 
 function endWalking(){
     clearInterval(player_walking);
@@ -381,7 +371,7 @@ $(window).resize(function(){
 
 
 
-
+    var blood_left;
     var diff_left = 0;
     var screen_width_part = screen_width / 10;
 
@@ -394,11 +384,9 @@ $(window).resize(function(){
 
             $('.blood div').css('padding-left',110);
 
-            var rand = randomNumber(0,3);
-
 
             $('#enemy'+i).css('left',diff_left+(screen_width-player_width)/2).css('top',(((screen_height_half*i)-player_height)));
-            var blood_left = -60;
+            blood_left = -60;
         }else{
 
 
@@ -417,7 +405,7 @@ $(window).resize(function(){
             }
             
             $('#enemy'+i).css('left',diff_left+(screen_width-player_width)/2).css('top',(((screen_height_half*i)-player_height)));
-            var blood_left = (parseInt($('#enemy'+i).css('left'))-((blood_width-150)/2)) + 'px';
+            blood_left = (parseInt($('#enemy'+i).css('left'))-((blood_width-150)/2)) + 'px';
         }
 
         $('#blood'+i).css('left', blood_left).css('top', ((parseInt($('#enemy'+i).css('top'))-((blood_width-150)/2))-50) + 'px');
@@ -436,6 +424,10 @@ $('button').mouseout(function(){
 });
 
 $(window).resize();
+
+setTimeout(function(){
+    window.scrollTo(0, 0);
+},500);
 </script>
 </body>
 </html>
