@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="favicon.ico"/>
 
     <link rel="prefetch" href="static/splat4.gif" />
-    <link rel="prefetch" href="static/attack2.gif" />
+    <link rel="prefetch" href="static/attack3.gif" />
     <link rel="prefetch" href="static/walk2.gif" />
     <link rel="prefetch" href="static/stop2.gif" />
     <link rel="prefetch" href="static/enemy_walk2.gif" />
@@ -351,11 +351,20 @@ function startWalking(final_y){
                     $('#sound_shoot')[0].currentTime = 0;
                     $('#sound_shoot')[0].play();
 
-                    $('#player').css('background-image', "url('static/attack2.gif?v=" + timestamp + "')");
 
+
+                    $('#player').css('background-image', "url('static/stop2.gif')");
+                    setTimeout(function(){
+                        $('#player').css('background-image', "url('static/attack3.gif')");
+
+                        setTimeout(function(){
+                            $('#player').css('background-image', "url('static/stop2.gif')");
+                        }, 200);
+                    }, 200);
 
                     setTimeout(function(){
 
+           
 
                         var diff = 1.1;
                         //if( is_mobile ){
