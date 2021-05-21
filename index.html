@@ -36,100 +36,113 @@
 
 <style>
 * {
-            font-family: 'VT323', monospace;
-            text-transform: uppercase;
-            font-size:30px;
-            color:white;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    font-size:30px;
+    color:white;
 
-            -webkit-touch-callout: none;
-            /* iOS Safari */
-            -webkit-user-select: none;
-            /* Safari */
-            -khtml-user-select: none;
-            /* Konqueror HTML */
-            -moz-user-select: none;
-            /* Old versions of Firefox */
-            -ms-user-select: none;
-            /* Internet Explorer/Edge */
-            user-select: none;
-            /* Non-prefixed version, currently
-                            supported by Chrome, Edge, Opera and Firefox */
-        }
-
-
-    body {
-        overflow-x:hidden;
-        background: black url('static/floor.png');
-        background-size:70px;
-        touch-action: pan-x pan-y;
-        width:100%;
-        height:100%;
-        cursor: url(static/cursor2.png) , default!important;
-    }
-
-    button{cursor:pointer;width:200px;margin-bottom:14px;border:4px white solid;display:block;text-align:center;background:none;color:white;padding:10px 0;}
-
-    .flip-horizontal {
-        -moz-transform: scaleX(-1);
-        -webkit-transform: scaleX(-1);
-        -o-transform: scaleX(-1);
-        transform: scaleX(-1);
-        -ms-filter: fliph;
-        /*IE*/
-        filter: fliph;
-        /*IE*/
-    }
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                    supported by Chrome, Edge, Opera and Firefox */
+}
 
 
-    .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body {
+    overflow-x:hidden;
+    background: black url('static/floor.png');
+    background-size:70px;
+    touch-action: pan-x pan-y;
+    width:100%;
+    height:100%;
+    cursor: url(static/cursor2.png) , default!important;
+}
 
-    }
+button{cursor:pointer;width:200px;margin-bottom:14px;border:4px white solid;display:block;text-align:center;background:none;color:white;padding:10px 0;}
 
-    .enemy{cursor: url(static/cursor3.png) , default!important;}
+.flip-horizontal {
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
+    -ms-filter: fliph;
+    /*IE*/
+    filter: fliph;
+    /*IE*/
+}
+
+.enemy{
+z-index:3;background:url('static/enemy_walk.gif');background-size:cover;width:100px;height:100px;position:absolute;
+}
+
+.blood{display:none;background-size:cover;z-index:1;position:absolute;height:600px;text-align:center;}
+
+.blood div{opacity:0;padding-left:90px;}
+
+.center {
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+.enemy{cursor: url(static/cursor3.png) , default!important;}
+
+#player{top:50px;z-index:4;background:url('static/stop2.gif');background-size:cover;width:100px;height:100px;position:absolute;}
 
 
-    .shadowed {
-	        -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
-        }
+#face{z-index:5;background:#000 url('static/face_normal2.gif');background-repeat:no-repeat;background-size:64px 80px;background-position:center center;width:87px;height:90px;position:fixed;left:50%;margin-left:-40px;bottom:0;}
 
-        #ui{z-index:5;background:#8c8c8c url('static/ui.png');background-position:top center;background-repeat:no-repeat;height:93px;position:fixed;left:0;bottom:0;width:100%;}
-        
+#ui{z-index:5;background:#8c8c8c url('static/ui.png');background-position:top center;background-repeat:no-repeat;height:93px;position:fixed;left:0;bottom:0;width:100%;}
 
-        @media screen and (max-width: 500px) {
+#canvas{width:100%;left:0;top:0;position:absolute;}
 
-            #ui{background-color:#8c8c8c;background-image:url('static/ui-mobile.png');}
-        }
+#author{cursor:pointer;font-size:30px;position:absolute;right:10px;top:10px;z-index:6;color:white;text-decoration:none;}
+
+@media screen and (max-width: 500px) {
+
+    #ui{background-color:#8c8c8c;background-image:url('static/ui-mobile.png');}
+}
 </style>
 
 
 
-<div style="width:100%;left:0;top:0;position:absolute;" id="canvas"></div>
+<div id="canvas"></div>
 
 <div id="ui"></div>
-<div id="face" style="z-index:5;background:#000 url('static/face_normal2.gif');background-repeat:no-repeat;background-size:64px 80px;background-position:center center;width:87px;height:90px;position:fixed;left:50%;margin-left:-40px;bottom:0;"></div>
+<div id="face"></div>
 
-    <a href="https://twitter.com/vivirenremoto" target="_blank" style="cursor:pointer;font-size:30px;position:absolute;right:10px;top:10px;z-index:6;color:white;text-decoration:none;">by
-        @vivirenremoto</a>
-    
-    
+<a href="https://twitter.com/vivirenremoto" target="_blank" id="author">by @vivirenremoto</a>
 
-    <div id="player" style="top:50px;z-index:4;background:url('static/stop2.gif');background-size:cover;width:100px;height:100px;position:absolute;"></div>
+<div id="player" ></div>
 
 
-    <div id="enemy1" data-blood="1" data-dead="0" class="enemy" style="z-index:3;background:url('static/enemy_walk.gif');background-size:cover;width:100px;height:100px;position:absolute;"></div>
-    <div id="blood1" class="center blood" style="display:none;background-size:cover;z-index:1;position:relative;height:600px;text-align:center;"><div style="opacity:0;padding-left:90px;">¡hola! soy miquel<br>programador web</div></div>
+<div id="enemy1" data-blood="1" data-dead="0" class="enemy"></div>
+<div id="blood1" class="center blood" ><div >¡hola! soy miquel<br>programador web</div></div>
 
-    <div id="enemy2" data-blood="2" data-dead="0" class="enemy" style="z-index:3;background:url('static/enemy_walk.gif');background-size:cover;width:100px;height:100px;position:absolute;"></div>
-    <div id="blood2" class="center blood" style="display:none;background-size:cover;z-index:1;position:absolute;height:600px;text-align:center;"><div style="opacity:0;padding-left:90px;">me gusta crear<br>experiencias<br>interactivas</div></div>
+<div id="enemy2" data-blood="2" data-dead="0" class="enemy"></div>
+<div id="blood2" class="center blood" ><div >me gusta crear<br>experiencias<br>interactivas</div></div>
 
-    <div id="enemy3" data-blood="3" data-dead="0" class="enemy" style="z-index:3;background:url('static/enemy_walk.gif');background-size:cover;width:100px;height:100px;position:absolute;"></div>
-    <div id="blood3" class="center blood" style="display:none;background-size:cover;z-index:1;position:absolute;height:600px;text-align:center;"><div style="opacity:0;padding-left:90px;">esto es una<br>demostración<br>de lo que puedo<br>hacer</div></div>
+<div id="enemy3" data-blood="3" data-dead="0" class="enemy"></div>
+<div id="blood3" class="center blood" ><div >esto es una<br>demostración<br>de lo que puedo<br>hacer</div></div>
 
-    <div id="enemy4" data-blood="4" data-dead="0" class="enemy" style="z-index:3;background:url('static/enemy_walk.gif');background-size:cover;width:100px;height:100px;position:absolute;"></div>
-    <div id="blood4" class="center blood" style="display:none;background-size:cover;z-index:1;position:absolute;height:600px;text-align:center;"><div style="opacity:0;padding-left:90px;"><button onclick="document.location.reload()">¿Repetir?</button><button onclick="share()">Compartir</button><button onclick="window.open('https://vivirenremoto.github.io/')">Portafolio</button></div></div>
+<div id="enemy4" data-blood="4" data-dead="0" class="enemy"></div>
+<div id="blood4" class="center blood" >
+    <div >
+        <button onclick="document.location.reload()">¿Repetir?</button>
+        <button onclick="share()">Compartir</button>
+        <button onclick="window.open('https://vivirenremoto.github.io/')">Portafolio</button>
+    </div>
+</div>
 
 
 
@@ -154,14 +167,16 @@ var final_x;
 var final_y;
 var player_width = 100;
 var player_height = 100;
+var player_width_default = 100;
+var player_height_default = 100;
 var total_enemies = $('.enemy').length;
 
 var player_walking;
 var current_x;
 var current_y;
-var screen_width = $(document).width();
-var screen_height = $(document).height();
-var screen_height_half = screen_height / 2;
+var screen_width;
+var screen_height;
+var screen_height_half;
 var is_mobile;
 var walking_speed = 1;
 var obj_enemy;
@@ -283,7 +298,7 @@ function startWalking(final_y){
                         //    diff = 1.1;
                         //}
 
-                        $(obj_enemy).css('width', 160*diff).css('height', 160*diff).css('margin-left', -25*diff).css('margin-top', -60*diff).css('background-image', "url('static/dead.gif?v=" + new Date().getTime() + "')");
+                        $(obj_enemy).css('width', 160*diff).css('height', 160*diff).css('margin-left', -20*diff).css('margin-top', -52*diff).css('background-image', "url('static/dead.gif?v=" + new Date().getTime() + "')");
                         setTimeout(function(){
                             $('#blood' + id_blood ).show().css('background-image', "url('static/splat3.gif?v=" + new Date().getTime() + "')");
                         
@@ -352,17 +367,18 @@ function endWalking(){
 
 
 $(window).resize(function(){
-    screen_width = $(document).width();
-    screen_height = $(document).height();
+    screen_width = $(window).width();
+    screen_height = $(window).height();
+    screen_height_half = parseInt(screen_height/2);
     is_mobile = screen_width < 1000;
 
 
-    if( is_mobile ){
-        player_width = player_width*1.1;
-        player_height = player_height*1.1;
+    //if( is_mobile ){
+        player_width = player_width_default*1.1;
+        player_height = player_height_default*1.1;
         $('#player').css('width', player_width).css('height', player_height);
         $('.enemy').css('width', player_width).css('height', player_height);
-    }
+    //}
 
 
 
@@ -373,7 +389,6 @@ $(window).resize(function(){
 
     var blood_left;
     var diff_left = 0;
-    var screen_width_part = screen_width / 10;
 
     for(var i=1; i<=total_enemies; i++){
 
@@ -403,10 +418,11 @@ $(window).resize(function(){
             }else{
                 diff_left = screen_width_part*1;
             }
-            
             $('#enemy'+i).css('left',diff_left+(screen_width-player_width)/2).css('top',(((screen_height_half*i)-player_height)));
             blood_left = (parseInt($('#enemy'+i).css('left'))-((blood_width-150)/2)) + 'px';
         }
+
+
 
         $('#blood'+i).css('left', blood_left).css('top', ((parseInt($('#enemy'+i).css('top'))-((blood_width-150)/2))-50) + 'px');
     }
