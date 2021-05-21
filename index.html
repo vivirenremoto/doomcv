@@ -267,7 +267,7 @@ function startWalking(final_y){
 
 
 
-//current_x == final_x && 
+        //current_x == final_x && 
         if (current_y == final_y) {
 
             endWalking();
@@ -275,6 +275,7 @@ function startWalking(final_y){
             if( is_attack ){
 
 
+                var timestamp = new Date().getTime();
                 
                 is_attack = false;
             
@@ -289,7 +290,7 @@ function startWalking(final_y){
                     $('#sound_shoot')[0].currentTime = 0;
                     $('#sound_shoot')[0].play();
 
-                    $('#player').css('background-image', "url('static/attack2.gif')");
+                    $('#player').css('background-image', "url('static/attack2.gif?v=" + timestamp + "')");
 
 
                     setTimeout(function(){
@@ -300,9 +301,9 @@ function startWalking(final_y){
                         //    diff = 1.1;
                         //}
 
-                        $(obj_enemy).css('width', 160*diff).css('height', 160*diff).css('margin-left', -20*diff).css('margin-top', -52*diff).css('background-image', "url('static/dead2.gif?v=" + new Date().getTime() + "')");
+                        $(obj_enemy).css('width', 160*diff).css('height', 160*diff).css('margin-left', -20*diff).css('margin-top', -52*diff).css('background-image', "url('static/dead2.gif?v=" + timestamp + "')");
                         setTimeout(function(){
-                            $('#blood' + id_blood ).addClass('center').css('display','flex').css('background-image', "url('static/splat4.gif?v=" + new Date().getTime() + "')");
+                            $('#blood' + id_blood ).addClass('center').css('display','flex').css('background-image', "url('static/splat4.gif?v=" + timestamp + "')");
                         
                             $('#blood' + id_blood ).find('div').animate({
                                 opacity:1
