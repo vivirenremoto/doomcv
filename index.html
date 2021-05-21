@@ -12,16 +12,16 @@
     <link rel="shortcut icon" href="favicon.ico"/>
 
     <link rel="prefetch" href="static/splat3.gif" />
-    <link rel="prefetch" href="static/attack.gif" />
-    <link rel="prefetch" href="static/walk.gif" />
+    <link rel="prefetch" href="static/attack2.gif" />
+    <link rel="prefetch" href="static/walk2.gif" />
     <link rel="prefetch" href="static/stop2.gif" />
-    <link rel="prefetch" href="static/enemy_walk.gif" />
-    <link rel="prefetch" href="static/dead.gif" />
+    <link rel="prefetch" href="static/enemy_walk2.gif" />
+    <link rel="prefetch" href="static/dead2.gif" />
     <link rel="prefetch" href="static/floor.png" />
-    <link rel="prefetch" href="static/face_normal2.gif" />
+    <link rel="prefetch" href="static/face_normal3.gif" />
     <link rel="prefetch" href="static/face_attack.png" />
-    <link rel="prefetch" href="static/ui.png" />
-    <link rel="prefetch" href="static/ui-mobile.png" />
+    <link rel="prefetch" href="static/ui2.png" />
+    <link rel="prefetch" href="static/ui-mobile2.png" />
     <link rel="prefetch" href="static/mp3/music.mp3" />
     <link rel="prefetch" href="static/mp3/shoot3.mp3" />
 
@@ -82,7 +82,7 @@ button{cursor:pointer;width:200px;margin-bottom:14px;border:4px white solid;disp
 }
 
 .enemy{
-z-index:3;background:url('static/enemy_walk.gif');background-size:cover;width:100px;height:100px;position:absolute;
+z-index:3;background:url('static/enemy_walk2.gif');background-size:cover;width:100px;height:100px;position:absolute;
 }
 
 .blood{display:none;background-size:cover;z-index:1;position:absolute;height:600px;text-align:center;}
@@ -101,9 +101,9 @@ align-items: center;
 #player{top:50px;z-index:4;background:url('static/stop2.gif');background-size:cover;width:100px;height:100px;position:absolute;}
 
 
-#face{z-index:5;background:#000 url('static/face_normal2.gif');background-repeat:no-repeat;background-size:64px 80px;background-position:center center;width:87px;height:90px;position:fixed;left:50%;margin-left:-40px;bottom:0;}
+#face{z-index:5;background:#000 url('static/face_normal3.gif');background-repeat:no-repeat;background-size:64px 80px;background-position:center center;width:87px;height:90px;position:fixed;left:50%;margin-left:-40px;bottom:0;}
 
-#ui{z-index:5;background:#8c8c8c url('static/ui.png');background-position:top center;background-repeat:no-repeat;height:93px;position:fixed;left:0;bottom:0;width:100%;}
+#ui{z-index:5;background:#8c8c8c url('static/ui2.png');background-position:top center;background-repeat:no-repeat;height:93px;position:fixed;left:0;bottom:0;width:100%;}
 
 #canvas{width:100%;left:0;top:0;position:absolute;}
 
@@ -111,7 +111,7 @@ align-items: center;
 
 @media screen and (max-width: 500px) {
 
-    #ui{background-color:#8c8c8c;background-image:url('static/ui-mobile.png');}
+    #ui{background-color:#8c8c8c;background-image:url('static/ui-mobile2.png');}
 
     .blood div{position:relative;    right: -80px;
     padding-left: 0;}
@@ -191,7 +191,7 @@ var music_playing = false;
 $('#canvas').click(function(e){
 
 
-    $('#face').css('background-image',"url('static/face_normal2.gif')");
+    $('#face').css('background-image',"url('static/face_normal3.gif')");
 
     final_y = e.offsetY - ((player_height-26)/2);
     is_attack = false;
@@ -250,7 +250,7 @@ function startWalking(final_y){
     clearInterval(player_walking);
 
     
-    $('#player').css('background-image', "url('static/walk.gif')");
+    $('#player').css('background-image', "url('static/walk2.gif')");
 
 
 
@@ -291,7 +291,7 @@ function startWalking(final_y){
                     $('#sound_shoot')[0].currentTime = 0;
                     $('#sound_shoot')[0].play();
 
-                    $('#player').css('background-image', "url('static/attack.gif')");
+                    $('#player').css('background-image', "url('static/attack2.gif')");
 
 
                     setTimeout(function(){
@@ -302,7 +302,7 @@ function startWalking(final_y){
                         //    diff = 1.1;
                         //}
 
-                        $(obj_enemy).css('width', 160*diff).css('height', 160*diff).css('margin-left', -20*diff).css('margin-top', -52*diff).css('background-image', "url('static/dead.gif?v=" + new Date().getTime() + "')");
+                        $(obj_enemy).css('width', 160*diff).css('height', 160*diff).css('margin-left', -20*diff).css('margin-top', -52*diff).css('background-image', "url('static/dead2.gif?v=" + new Date().getTime() + "')");
                         setTimeout(function(){
                             $('#blood' + id_blood ).show().css('background-image', "url('static/splat3.gif?v=" + new Date().getTime() + "')");
                         
@@ -311,7 +311,7 @@ function startWalking(final_y){
                             }, 500);
 
                             
-                            $('#face').css('background-image',"url('static/face_normal2.gif')");
+                            $('#face').css('background-image',"url('static/face_normal3.gif')");
 
                             setTimeout(function(){
                                 $(obj_enemy).fadeOut('fast');
@@ -439,7 +439,7 @@ $('button').mouseover(function(){
 });
 
 $('button').mouseout(function(){
-    $('#face').css('background-image',"url('static/face_normal2.gif')");
+    $('#face').css('background-image',"url('static/face_normal3.gif')");
 
 });
 
