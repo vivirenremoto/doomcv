@@ -129,20 +129,20 @@ align-items: center;
 
 
 <div id="enemy1" data-blood="1" data-dead="0" class="enemy"></div>
-<div id="blood1" class="center blood" ><div >¡hola! soy miquel<br>programador web</div></div>
+<div id="blood1" class=" blood" ><div >¡hola! soy miquel<br>programador web</div></div>
 
 <div id="enemy2" data-blood="2" data-dead="0" class="enemy"></div>
-<div id="blood2" class="center blood" ><div >me gusta crear<br>experiencias<br>interactivas</div></div>
+<div id="blood2" class=" blood" ><div >me gusta crear<br>experiencias web<br>diferentes</div></div>
 
 <div id="enemy3" data-blood="3" data-dead="0" class="enemy"></div>
-<div id="blood3" class="center blood" ><div >esto es una<br>demostración<br>de lo que<br>puedo hacer</div></div>
+<div id="blood3" class=" blood" ><div >esto es una<br>demostración<br>de lo que<br>puedo hacer</div></div>
 
 <div id="enemy4" data-blood="4" data-dead="0" class="enemy"></div>
-<div id="blood4" class="center blood" >
+<div id="blood4" class=" blood" >
     <div >
         <button onclick="document.location.reload()">¿Repetir?</button>
         <button onclick="share()">Compartir</button>
-        <button onclick="window.open('https://vivirenremoto.github.io/')">Portafolio</button>
+        <button onclick="window.open('https://vivirenremoto.github.io/')">Ver más</button>
     </div>
 </div>
 
@@ -302,7 +302,7 @@ function startWalking(final_y){
 
                         $(obj_enemy).css('width', 160*diff).css('height', 160*diff).css('margin-left', -20*diff).css('margin-top', -52*diff).css('background-image', "url('static/dead2.gif?v=" + new Date().getTime() + "')");
                         setTimeout(function(){
-                            $('#blood' + id_blood ).show().css('background-image', "url('static/splat4.gif?v=" + new Date().getTime() + "')");
+                            $('#blood' + id_blood ).addClass('center').css('display','flex').css('background-image', "url('static/splat4.gif?v=" + new Date().getTime() + "')");
                         
                             $('#blood' + id_blood ).find('div').animate({
                                 opacity:1
