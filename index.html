@@ -191,7 +191,7 @@ $('#canvas').click(function(e){
 
     $('#face').css('background-image',"url('static/face_normal3.gif')");
 
-    final_y = e.offsetY - ((player_height-26)/2);
+    final_y = parseInt(e.offsetY - ((player_height-26)/2));
     is_attack = false;
     startWalking(final_y);
 
