@@ -33,7 +33,18 @@
     <meta name="twitter:title" content="DOOM CV - Miquel Camps Orteza">
     <meta name="twitter:image" content="https://vivirenremoto.github.io/doomcv/static/social.png">
 </head>
-<body style="overflow-x:hidden;">
+<body>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3LN7C3HCJL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3LN7C3HCJL');
+</script>
 
 <style>
 * {
@@ -107,12 +118,41 @@ align-items: center;
 
 #author{cursor:pointer;font-size:30px;position:absolute;right:10px;top:10px;z-index:6;color:white;text-decoration:none;}
 
+
+
+#play {
+    cursor: pointer;
+    border: 1px #ccc solid;
+    display: none;
+    padding: 5px 0;
+    padding-top:0;
+    width: 140px;
+    background: white;
+    position: fixed;
+    margin-left:-70px;
+    left: 50%;
+    text-align: center;
+    font-family: Arial;
+    z-index: 6;
+    text-decoration: none;
+    top: 0;
+    color:black;
+}
+
+#play span{
+    color:black;}
+
+
+
 @media screen and (max-width: 500px) {
 
     #ui{background-color:#8c8c8c;background-image:url('static/ui-mobile2.png');}
 
     .blood div{position:relative;    right: -80px;
     padding-left: 0;}
+
+    
+    #play{display:none !important;}
 }
 </style>
 
@@ -124,6 +164,9 @@ align-items: center;
 <div id="face"></div>
 
 <a href="https://twitter.com/vivirenremoto" target="_blank" id="author">by @vivirenremoto</a>
+
+<a href="http://bit.ly/play_doom" id="play" target="_blank" style="display: inline;">
+    <span style="font-size:20px;" id="btn_cta" data-cta1="¿Nostalgia?" data-cta2="Comprar juego">¿Nostalgia?</span></a>
 
 <div id="player" ></div>
 
@@ -172,7 +215,6 @@ var player_height = 100;
 var player_width_default = 100;
 var player_height_default = 100;
 var total_enemies = $('.enemy').length;
-
 var player_walking;
 var current_x;
 var current_y;
@@ -185,6 +227,25 @@ var obj_enemy;
 var is_attack;
 var blood_width = 700;
 var music_playing = false;
+
+
+
+setInterval(function () {
+
+
+    $('#btn_cta').html($('#btn_cta').data('cta2'));
+
+    setTimeout(function () {
+
+
+        $('#btn_cta').html($('#btn_cta').data('cta1'));
+
+    }, 2000);
+
+}, 4000);
+
+
+
 
 $('#canvas').click(function(e){
 
