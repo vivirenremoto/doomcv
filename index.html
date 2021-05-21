@@ -81,9 +81,9 @@ button{cursor:pointer;width:200px;margin-bottom:14px;border:4px white solid;disp
     /*IE*/
 }
 
-.enemy{z-index:3;background:url('static/enemy_walk2.gif');background-size:cover;width:100px;height:100px;position:absolute;}
+.enemy{image-rendering: pixelated;z-index:3;background:url('static/enemy_walk2.gif');background-size:cover;width:100px;height:100px;position:absolute;}
 
-.blood{display:none;background-size:cover;z-index:1;position:absolute;height:600px;text-align:center;}
+.blood{image-rendering: pixelated;display:none;background-size:cover;z-index:1;position:absolute;height:600px;text-align:center;}
 
 .blood div{opacity:0;padding-left:50px;}
 
@@ -96,7 +96,7 @@ align-items: center;
 
 .enemy{cursor: url(static/cursor3.png) , default!important;}
 
-#player{top:50px;z-index:4;background:url('static/stop2.gif');background-size:cover;width:100px;height:100px;position:absolute;}
+#player{image-rendering: pixelated;top:50px;z-index:4;background:url('static/stop2.gif');background-size:cover;width:100px;height:100px;position:absolute;}
 
 
 #face{z-index:5;background:#000 url('static/face_normal3.gif');background-repeat:no-repeat;background-size:64px 80px;background-position:center center;width:87px;height:90px;position:fixed;left:50%;margin-left:-40px;bottom:0;}
