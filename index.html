@@ -230,6 +230,7 @@ var screen_height_half;
 var is_mobile;
 var walking_speed = 1;
 var obj_enemy;
+var obj_enemy_prev;
 var is_attack;
 var blood_width = 700;
 var music_playing = false;
@@ -408,6 +409,7 @@ function startWalking(final_y){
                         
                         $('#blood' + id_blood ).addClass('center').css('display','flex').css('background-image', "url('static/splat4.gif?v=" + timestamp + "')");
 
+                        obj_enemy_prev = obj_enemy;
                         
                         setTimeout(function(){
 
@@ -419,7 +421,7 @@ function startWalking(final_y){
                             $('#face').css('background-image',"url('static/face_normal3.gif')");
 
                             setTimeout(function(){
-                                $(obj_enemy).fadeOut('fast');
+                                $(obj_enemy_prev).fadeOut('fast');
 
                                 
 
