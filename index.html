@@ -93,7 +93,7 @@ button{cursor:pointer;width:200px;margin-bottom:13px;border:3px white solid;disp
     /*IE*/
 }
 
-.enemy{image-rendering: pixelated;z-index:3;background:url('static/enemy_walk2.gif');background-size:cover;width:100px;height:100px;position:absolute;}
+.enemy{image-rendering: pixelated;z-index:3;background:url('static/enemy_walk2.gif');background-size:contain;width:100px;height:100px;position:absolute;}
 
 .blood{image-rendering: pixelated;display:none;background-size:cover;z-index:1;position:absolute;height:600px;text-align:center;}
 
@@ -108,7 +108,7 @@ align-items: center;
 
 .enemy{cursor: url(static/cursor3.png) , default!important;}
 
-#player{image-rendering: pixelated;top:50px;z-index:4;background:url('static/stop2.gif');background-size:cover;width:100px;height:100px;position:absolute;}
+#player{image-rendering: pixelated;top:50px;z-index:4;background:url('static/stop2.gif');background-size:contain;width:100px;height:100px;position:absolute;}
 
 
 #face{z-index:5;background:#000 url('static/face_normal3.gif');background-repeat:no-repeat;background-size:64px 80px;background-position:center center;width:87px;height:90px;position:fixed;left:50%;margin-left:-40px;bottom:0;}
@@ -233,6 +233,7 @@ var is_attack;
 var blood_width = 700;
 var music_playing = false;
 var first_sound = true;
+var total_kills = 0;
 
 
 
@@ -375,7 +376,17 @@ function startWalking(final_y){
                         $('#player').css('background-image', "url('static/attack3.gif')");
 
                         setTimeout(function(){
-                            $('#player').css('background-image', "url('static/stop2.gif')");
+                            
+
+                            total_kills++;
+
+                            if( total_enemies == total_kills ){
+                                $('#player').css('background-image', "url('static/end.gif')");
+                            }else{
+                                $('#player').css('background-image', "url('static/stop2.gif')");
+                            }
+
+
                         }, 200);
                     }, 200);
 
@@ -422,6 +433,9 @@ function startWalking(final_y){
                 $('#player').css('background-image', "url('static/stop2.gif')");
             }
 
+
+
+            
 
 
         } else {
