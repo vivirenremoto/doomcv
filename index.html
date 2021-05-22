@@ -22,8 +22,9 @@
     <link rel="prefetch" href="static/face_attack.png" />
     <link rel="prefetch" href="static/ui2.png" />
     <link rel="prefetch" href="static/ui-mobile2.png" />
-    <link rel="prefetch" href="static/mp3/music2.mp3" />
+    <link rel="prefetch" href="static/mp3/music3.mp3" />
     <link rel="prefetch" href="static/mp3/shoot5.mp3" />
+    <link rel="prefetch" href="static/mp3/shoot_no_voice.mp3" />
 
     <meta property="og:image" content="https://vivirenremoto.github.io/doomcv/static/social.png">
     <meta property="og:image:secure_url" content="https://vivirenremoto.github.io/doomcv/static/social.png">
@@ -192,11 +193,15 @@ align-items: center;
 
 
 <audio id="sound_music" loop>
-    <source src="static/mp3/music2.mp3" type="audio/mp3">
+    <source src="static/mp3/music3.mp3" type="audio/mp3">
 </audio>
 
 <audio id="sound_shoot">
     <source src="static/mp3/shoot5.mp3" type="audio/mp3">
+</audio>
+
+<audio id="sound_shoot2">
+    <source src="static/mp3/shoot_no_voice.mp3" type="audio/mp3">
 </audio>
 
 
@@ -227,6 +232,7 @@ var obj_enemy;
 var is_attack;
 var blood_width = 700;
 var music_playing = false;
+var first_sound = true;
 
 
 
@@ -347,9 +353,20 @@ function startWalking(final_y){
 
                 
 
+                    if( first_sound ){
+                        
+                        $('#sound_shoot')[0].currentTime = 0;
+                        $('#sound_shoot')[0].play();
 
-                    $('#sound_shoot')[0].currentTime = 0;
-                    $('#sound_shoot')[0].play();
+                        first_sound = false;
+
+                    }else{
+                        $('#sound_shoot2')[0].currentTime = 0;
+                        $('#sound_shoot2')[0].play();
+
+                    }
+
+
 
 
 
