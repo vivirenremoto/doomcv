@@ -384,7 +384,7 @@ function startWalking(final_y){
                             total_kills++;
 
                             if( total_enemies == total_kills ){
-                                $('#player').css('background-image', "url('static/end.gif')");
+                                $('#player').css('background-image', "url('static/end.gif')").css('margin-top','-10px');
                             }else{
                                 $('#player').css('background-image', "url('static/stop2.gif')");
                             }
@@ -435,7 +435,7 @@ function startWalking(final_y){
             }else{
 
                 if( total_enemies == total_kills ){
-                    $('#player').css('background-image', "url('static/end.gif')");
+                    $('#player').css('background-image', "url('static/end.gif')").css('margin-top','-10px');
                 }else{
                     $('#player').css('background-image', "url('static/stop2.gif')");
                 }
