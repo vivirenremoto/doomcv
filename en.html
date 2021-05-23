@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DOOM CV - Miquel Camps Orteza</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+        
+    <link rel="shortcut icon" href="favicon.ico"/>
+
+    <link rel="prefetch" href="static/splat4.gif" />
+    <link rel="prefetch" href="static/attack3.gif" />
+    <link rel="prefetch" href="static/walk2.gif" />
+    <link rel="prefetch" href="static/stop2.gif" />
+    <link rel="prefetch" href="static/end.gif" />
+    <link rel="prefetch" href="static/enemy_walk2.gif" />
+    <link rel="prefetch" href="static/dead2.gif" />
+    <link rel="prefetch" href="static/floor.png" />
+    <link rel="prefetch" href="static/face_normal3.gif" />
+    <link rel="prefetch" href="static/face_attack.png" />
+    <link rel="prefetch" href="static/ui2.png" />
+    <link rel="prefetch" href="static/ui-mobile2.png" />
+    <link rel="prefetch" href="static/mp3/music2.mp3" />
+    <link rel="prefetch" href="static/mp3/shoot5.mp3" />
+    <link rel="prefetch" href="static/mp3/shoot_no_voice.mp3" />
+
+    <meta property="og:image" content="https://vivirenremoto.github.io/doomcv/static/social.png">
+    <meta property="og:image:secure_url" content="https://vivirenremoto.github.io/doomcv/static/social.png">
+    <meta property="og:image:alt" content="DOOM CV - Miquel Camps Orteza">
+    <meta property="og:image:type" content="image/png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DOOM CV - Miquel Camps Orteza">
+    <meta name="twitter:image" content="https://vivirenremoto.github.io/doomcv/static/social.png">
+</head>
+<body>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3LN7C3HCJL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3LN7C3HCJL');
+</script>
+
+<style>
+* {
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    font-size:30px;
+    color:white;
+
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+
+body {
+    overflow-x:hidden;
+    background: black url('static/floor.png');
+    background-size:70px;
+    touch-action: pan-x pan-y;
+    width:100%;
+    height:100%;
+    cursor: url(static/cursor2.png) , default!important;
+}
+
+button{cursor:pointer;width:200px;margin-bottom:13px;border:3px white solid;display:block;text-align:center;background:none;color:white;padding:10px 0;}
+
+.flip-horizontal {
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
+    -ms-filter: fliph;
+    /*IE*/
+    filter: fliph;
+    /*IE*/
+}
+
+.enemy{image-rendering: pixelated;z-index:3;background:url('static/enemy_walk2.gif');background-size:contain;width:100px;height:100px;position:absolute;}
+
+.blood{image-rendering: pixelated;display:none;background-size:cover;z-index:1;position:absolute;height:600px;text-align:center;}
+
+.blood div{opacity:0;padding-left:50px;}
+
+.center {
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+.enemy{cursor: url(static/cursor3.png) , default!important;}
+
+#player{image-rendering: pixelated;top:50px;z-index:4;background:url('static/stop2.gif');background-size:contain;width:100px;height:100px;position:absolute;}
+
+
+#face{z-index:5;background:#000 url('static/face_normal3.gif');background-repeat:no-repeat;background-size:64px 80px;background-position:center center;width:87px;height:90px;position:fixed;left:50%;margin-left:-40px;bottom:0;}
+
+#ui{z-index:5;background:#8c8c8c url('static/ui2.png');background-position:top center;background-repeat:no-repeat;height:93px;position:fixed;left:0;bottom:0;width:100%;}
+
+#canvas{width:100%;left:0;top:0;position:absolute;}
+
+#author{cursor:pointer;font-size:30px;position:absolute;right:10px;top:10px;z-index:6;color:white;text-decoration:none;}
+
+
+
+#play {
+    cursor: pointer;
+    border: 1px #ccc solid;
+    display: none;
+    padding: 5px 0;
+    padding-top:0;
+    width: 140px;
+    background: white;
+    position: fixed;
+    margin-left:-70px;
+    left: 50%;
+    text-align: center;
+    font-family: Arial;
+    z-index: 6;
+    text-decoration: none;
+    top: 0;
+    color:black;
+}
+
+#play span{
+    color:black;}
+
+
+
+@media screen and (max-width: 500px) {
+
+    #ui{background-color:#8c8c8c;background-image:url('static/ui-mobile2.png');}
+
+    .blood div{position:relative;    right: -80px;
+    padding-left: 0;}
+
+    
+    #play{display:none !important;}
+}
+</style>
+
+
+
+<div id="canvas"></div>
+
+<div id="ui"></div>
+<div id="face"></div>
+
+<a href="https://twitter.com/vivirenremoto" target="_blank" id="author">by @vivirenremoto</a>
+
+<a href="http://bit.ly/play_doom" id="play" target="_blank" style="display: inline;">
+    <span style="font-size:20px;" id="btn_cta" data-cta1="Nostalgia?" data-cta2="Buy game">Nostalgia?</span></a>
+
+<div id="player" ></div>
+
+
+<div id="enemy1" data-blood="1" data-dead="0" class="enemy"></div>
+<div id="blood1" class=" blood" ><div >hello! i'm miquel<br>web developer</div></div>
+
+<div id="enemy2" data-blood="2" data-dead="0" class="enemy"></div>
+<div id="blood2" class=" blood" ><div >i like to create<br>different<br>web experiences</div></div>
+
+<div id="enemy3" data-blood="3" data-dead="0" class="enemy"></div>
+<div id="blood3" class=" blood" ><div >this is a<br>demostration<br>of what<br>i can do</div></div>
+
+
+
+<div id="enemy4" data-blood="4" data-dead="0" class="enemy"></div>
+<div id="blood4" class=" blood" >
+    <div >
+        Do you know<br>DOOM Captcha?<br><br>
+        <button onclick="window.open('https://vivirenremoto.github.io/doomcaptcha/');">MORE INFO</button>
+    </div>
+</div>
+
+<div id="enemy5" data-blood="5" data-dead="0" class="enemy"></div>
+<div id="blood5" class=" blood" >
+    <div >
+        <button onclick="document.location.reload()">Retry?</button>
+        <button onclick="share()">Share</button>
+        <button onclick="window.open('https://vivirenremoto.github.io/')">See more</button>
+    </div>
+</div>
+
+
+<audio id="sound_music" loop>
+    <source src="static/mp3/music2.mp3" type="audio/mp3">
+</audio>
+
+<audio id="sound_shoot">
+    <source src="static/mp3/shoot5.mp3" type="audio/mp3">
+</audio>
+
+<audio id="sound_shoot2">
+    <source src="static/mp3/shoot_no_voice.mp3" type="audio/mp3">
+</audio>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+    
+    
+<script>
+var final_x;
+var final_y;
+var player_width = 100;
+var player_height = 100;
+var player_width_default = 100;
+var player_height_default = 100;
+var total_enemies = $('.enemy').length;
+var player_walking;
+var current_x;
+var current_y;
+var screen_width;
+var screen_height;
+var screen_height_half;
+var is_mobile;
+var walking_speed = 1;
+var obj_enemy;
+var obj_enemy_prev;
+var is_attack;
+var blood_width = 700;
+var music_playing = false;
+var first_sound = true;
+var total_kills = 0;
+
+
+
+setInterval(function () {
+
+
+    $('#btn_cta').html($('#btn_cta').data('cta2'));
+
+    setTimeout(function () {
+
+
+        $('#btn_cta').html($('#btn_cta').data('cta1'));
+
+    }, 2000);
+
+}, 4000);
+
+
+
+
+$('#canvas').click(function(e){
+
+
+    $('#face').css('background-image',"url('static/face_normal3.gif')");
+
+    final_y = parseInt(e.offsetY - ((player_height-26)/2));
+    is_attack = false;
+    startWalking(final_y);
+
+    
+});
+
+$('.enemy').click(function(e){
+
+    
+    obj_enemy = $(this);
+
+    is_attack = true;
+
+
+    setTimeout(function(){
+
+
+        $('#face').css('background-image',"url('static/face_attack.png')");
+
+        final_y = parseInt($(obj_enemy).css('top')) + 12;
+        is_attack = true;
+        startWalking(final_y);
+    },1);
+
+
+});
+
+
+function share() {
+    var share_title = document.title;
+    var share_url = document.location.href;
+
+    if (navigator.share) {
+        navigator.share({
+            title: share_title,
+            url: share_url
+        });
+
+    } else {
+        window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(share_title) + '&tw_p=tweetbutton&url=' + encodeURIComponent(share_url));
+    }
+}
+
+
+function startWalking(final_y){
+
+    if (!music_playing) {
+        music_playing = true;
+        $('#sound_music')[0].volume = 0.5;
+        $('#sound_music')[0].play();
+    }
+
+    
+
+    clearInterval(player_walking);
+
+    
+    $('#player').css('background-image', "url('static/walk2.gif')");
+
+
+
+
+    player_walking = setInterval(function () {
+
+
+        current_x = parseInt($('#player').css('left'));
+        current_y = parseInt($('#player').css('top'));
+
+        if (current_x > final_x) {
+            //$('#player').addClass('flip-horizontal');
+        } else if (current_x < final_x) {
+            //$('#player').removeClass('flip-horizontal');
+        }
+
+
+
+        //current_x == final_x && 
+        if (current_y == final_y) {
+
+            endWalking();
+
+            if( is_attack ){
+
+
+                var timestamp = new Date().getTime();
+                
+                is_attack = false;
+            
+                var id_blood = $(obj_enemy).data('blood');
+                var enemy_dead = $(obj_enemy).data('dead');
+                if( enemy_dead == 0 ){
+                    $(obj_enemy).data('dead', 1)
+
+                
+
+                    if( first_sound ){
+                        
+                        $('#sound_shoot')[0].volume = 0.5;
+                        $('#sound_shoot')[0].currentTime = 0;
+                        $('#sound_shoot')[0].play();
+
+                        first_sound = false;
+
+                    }else{
+                        $('#sound_shoot2')[0].volume = 0.5;
+                        $('#sound_shoot2')[0].currentTime = 0;
+                        $('#sound_shoot2')[0].play();
+
+                    }
+
+
+
+
+
+                    $('#player').css('background-image', "url('static/stop2.gif')");
+                    setTimeout(function(){
+                        $('#player').css('background-image', "url('static/attack3.gif')");
+
+                        setTimeout(function(){
+                            
+
+                            total_kills++;
+
+                            if( total_enemies == total_kills ){
+                                $('#player').css('background-image', "url('static/end.gif')").css('margin-top','-10px');
+                            }else{
+                                $('#player').css('background-image', "url('static/stop2.gif')");
+                            }
+
+
+                        }, 200);
+                    }, 200);
+
+                    setTimeout(function(){
+
+           
+
+                        var diff = 1.1;
+                        //if( is_mobile ){
+                        //    diff = 1.1;
+                        //}
+
+                        $(obj_enemy).css('width', 160*diff).css('height', 160*diff).css('margin-left', -20*diff).css('margin-top', -52*diff).css('background-image', "url('static/dead2.gif?v=" + timestamp + "')");
+
+                        
+                        $('#blood' + id_blood ).addClass('center').css('display','flex').css('background-image', "url('static/splat4.gif?v=" + timestamp + "')");
+
+                        obj_enemy_prev = obj_enemy;
+                        
+                        setTimeout(function(){
+
+                            $('#blood' + id_blood ).find('div').animate({
+                                opacity:1
+                            }, 500);
+
+                            
+                            $('#face').css('background-image',"url('static/face_normal3.gif')");
+
+                            setTimeout(function(){
+                                $(obj_enemy_prev).fadeOut('fast');
+
+                                
+
+
+                            }, 500);
+                        }, 250);
+
+                        
+                        //$('#player').css('background-image', "url('static/stop2.gif')");
+                    }, 100);
+
+                }
+            
+            }else{
+
+                if( total_enemies == total_kills ){
+                    $('#player').css('background-image', "url('static/end.gif')").css('margin-top','-10px');
+                }else{
+                    $('#player').css('background-image', "url('static/stop2.gif')");
+                }
+            
+            }
+
+
+
+            
+
+
+        } else {
+            var next_x = current_x;
+            var next_y = current_y;
+
+            if (current_x < final_x) {
+                next_x += walking_speed;
+            } else if (current_x > final_x) {
+                next_x -= walking_speed;
+            }
+
+            
+            if (current_y < final_y) {
+                next_y += walking_speed;
+            } else if (current_y > final_y) {
+                next_y -= walking_speed;
+            }
+
+            $('#player').css({
+                //'left': next_x + 'px',
+                'top': next_y + 'px',
+            });
+        }
+
+
+    },1);
+
+}
+
+
+function endWalking(){
+    clearInterval(player_walking);
+}
+
+
+
+
+$(window).resize(function(){
+    screen_width = $(window).width();
+    screen_height = $(window).height();
+    screen_height_half = parseInt(screen_height/2);
+    is_mobile = screen_width < 1000;
+
+
+    //if( is_mobile ){
+        player_width = player_width_default*1.1;
+        player_height = player_height_default*1.1;
+        $('#player').css('width', player_width).css('height', player_height);
+        $('.enemy').css('width', player_width).css('height', player_height);
+    //}
+
+
+
+    $('#canvas').css('height', (total_enemies*screen_height_half)+screen_height_half).css('width', screen_width);
+
+
+
+
+    var blood_left;
+    var diff_left = 0;
+
+    for(var i=1; i<=total_enemies; i++){
+
+        if( is_mobile ){
+            $('#player').css('left','20px');
+
+            $('.blood').css('width', screen_width +60);
+
+
+
+
+            $('#enemy'+i).css('left',diff_left+(screen_width-player_width)/2).css('top',(((screen_height_half*i)-player_height)));
+            blood_left = -60;
+        }else{
+
+
+            $('.blood').css('width', 600).css('height', 600);
+
+            $('#player').css('left',(screen_width-player_width)/6);
+
+            var screen_width_part = screen_width / 10;
+
+
+
+            if( (i-1)%2 == 0){
+                diff_left = screen_width_part*0;
+            }else{
+                diff_left = screen_width_part*1;
+            }
+            $('#enemy'+i).css('left',diff_left+(screen_width-player_width)/2).css('top',(((screen_height_half*i)-player_height)));
+            blood_left = (parseInt($('#enemy'+i).css('left'))-((blood_width-150)/2)) + 'px';
+        }
+
+
+
+        $('#blood'+i).css('left', blood_left).css('top', ((parseInt($('#enemy'+i).css('top'))-((blood_width-150)/2))-50) + 'px');
+    }
+    
+});
+
+$('button').mouseover(function(){
+    $('#face').css('background-image',"url('static/face_attack.png')");
+
+});
+
+$('button').mouseout(function(){
+    $('#face').css('background-image',"url('static/face_normal3.gif')");
+
+});
+
+$(window).resize();
+
+setTimeout(function(){
+    window.scrollTo(0, 0);
+},500);
+</script>
+</body>
+</html>
